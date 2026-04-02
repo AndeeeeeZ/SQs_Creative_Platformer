@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private PlayerMarkController playerMark; // 2D representation of the player
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float turnSpeed;
@@ -72,13 +75,16 @@ public class PlayerMovement : MonoBehaviour
     {
         isMoving = true;
         direction = context.ReadValue<float>();
-
+        playerMark.StartWalking(); 
+        
         // Adjust target rotation based on direction
         targetYRotation = direction > 0 ? 0f : 180f;
+        playerMark.SetDirection(direction); 
     }
     private void StopMoving(InputAction.CallbackContext context)
     {
         isMoving = false;
+        playerMark.StopWalking(); 
     }
 
     // Use before applying upward force for jump
