@@ -27,7 +27,7 @@
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
+                    "name": "1D Axis 3D",
                     "id": "a3045252-3d49-4399-b071-d5846fc5e26c",
                     "path": "1DAxis",
                     "interactions": "",
@@ -52,6 +52,39 @@
                     "name": "positive",
                     "id": "62f85e07-d3e5-4168-8a03-589a5f76a91c",
                     "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move3D",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis 2D",
+                    "id": "1c4d9d8f-cf8c-4a7d-8043-683d7507c6d0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move3D",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e0d38871-519d-401f-bad2-67cebd0f1069",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move3D",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e29b156e-c09a-45cb-a74c-60441b862661",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
