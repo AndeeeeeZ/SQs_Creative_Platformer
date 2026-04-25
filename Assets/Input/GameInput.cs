@@ -102,6 +102,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Move2D"",
+                    ""type"": ""Button"",
+                    ""id"": ""65d32579-fe52-4458-9850-0b50c5eab9cd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""b0318d7f-25ee-4ec9-a598-b7284c225a54"",
@@ -146,13 +155,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""9c74178e-6347-48e6-bc4d-331eb77ea138"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis 2D"",
                     ""id"": ""1c4d9d8f-cf8c-4a7d-8043-683d7507c6d0"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move3D"",
+                    ""action"": ""Move2D"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -163,7 +183,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move3D"",
+                    ""action"": ""Move2D"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -174,20 +194,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move3D"",
+                    ""action"": ""Move2D"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9c74178e-6347-48e6-bc4d-331eb77ea138"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -197,6 +206,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move3D = m_Player.FindAction("Move3D", throwIfNotFound: true);
+        m_Player_Move2D = m_Player.FindAction("Move2D", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
     }
 
@@ -279,6 +289,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move3D;
+    private readonly InputAction m_Player_Move2D;
     private readonly InputAction m_Player_Jump;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -295,6 +306,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Move3D".
         /// </summary>
         public InputAction @Move3D => m_Wrapper.m_Player_Move3D;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Move2D".
+        /// </summary>
+        public InputAction @Move2D => m_Wrapper.m_Player_Move2D;
         /// <summary>
         /// Provides access to the underlying input action "Player/Jump".
         /// </summary>
@@ -328,6 +343,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Move3D.started += instance.OnMove3D;
             @Move3D.performed += instance.OnMove3D;
             @Move3D.canceled += instance.OnMove3D;
+            @Move2D.started += instance.OnMove2D;
+            @Move2D.performed += instance.OnMove2D;
+            @Move2D.canceled += instance.OnMove2D;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -345,6 +363,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Move3D.started -= instance.OnMove3D;
             @Move3D.performed -= instance.OnMove3D;
             @Move3D.canceled -= instance.OnMove3D;
+            @Move2D.started -= instance.OnMove2D;
+            @Move2D.performed -= instance.OnMove2D;
+            @Move2D.canceled -= instance.OnMove2D;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -395,6 +416,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove3D(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Move2D" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMove2D(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
