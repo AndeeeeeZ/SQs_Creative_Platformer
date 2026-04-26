@@ -4,21 +4,29 @@ public class Stair : MonoBehaviour, IInteractable
 {
     [SerializeField] private Transform teleportTransform; // position + rotation
     [SerializeField] private Stair correspondingStair; 
-    [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject[] UI;
     [SerializeField] private PlayerMovement.Direction directionWhenTeleport;
 
     private void Awake()
     {
-        UI.SetActive(false); 
+        SetUIActiveness(false);
     }
     public void OnEnterRange()
     {
-        UI.SetActive(true); 
+        SetUIActiveness(true);
     }
 
     public void OnExitRange()
     {
-        UI.SetActive(false); 
+        SetUIActiveness(false);
+    }
+
+    public void SetUIActiveness(bool v)
+    {
+        foreach (GameObject u in UI)
+        {
+            u.SetActive(v); 
+        }
     }
 
     public Transform GetTeleportTransform()

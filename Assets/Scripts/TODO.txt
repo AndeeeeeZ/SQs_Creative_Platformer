@@ -1,18 +1,11 @@
 Code
-- Going up and down
 - Fix jump
 - Ground detection
 - Camera shake for walking
-- Make 2D camera fit in a mirror in hand
+- Make 2D camera fit in a thing in hand
 - Dialogue system
 - Monster
 - Make 2D camera not move when jumping
-- Add interaction sign to 2d stair
 
 Art
-- Add character art
-- Add environment art
-
-2D
-
-
+- Fix window texture issue
