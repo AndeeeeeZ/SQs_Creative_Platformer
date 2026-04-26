@@ -8,6 +8,7 @@ Code
 - Monster
 - Make 2D camera not move when jumping
 - Ground detection
+- Add interaction sign to 2d stair
 
 Art
 - Add character art

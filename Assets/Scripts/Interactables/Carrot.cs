@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class Carrot : MonoBehaviour, IInteractable
+public class Carrot : MonoBehaviour
 {
-    public void OnEnterRange()
-    {
-    }
+    [SerializeField] private GameObject parent;
 
-    public void OnExitRange()
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
+            OnInteract(); 
     }
 
     public void OnInteract()
     {
         Debug.Log("Collected carrot"); 
-        Destroy(gameObject); 
+        Destroy(parent); 
     }
 }
