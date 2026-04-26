@@ -1,9 +1,14 @@
 Code
-- Turn around
 - Going up and down
 - Camera shake for walking
 - Make 2D camera fit in a mirror in hand
+- Carrot
+- Dialogue system
+- Plague (the sign or whatever) 
+- Monster
 
 Art
 - Add character art
 - Add environment art
+
+
