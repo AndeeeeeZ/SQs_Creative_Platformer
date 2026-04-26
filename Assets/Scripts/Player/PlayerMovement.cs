@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private float targetYRotation;
 
     private Direction faceDirection = Direction.RIGHT; // default facing right
-    private float currentVelocityX = 0f;
 
     private bool move2DHeld;
     private bool move3DHeld;

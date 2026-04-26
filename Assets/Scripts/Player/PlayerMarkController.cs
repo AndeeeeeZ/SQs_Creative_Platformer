@@ -13,12 +13,13 @@ public class PlayerMarkController : MonoBehaviour
 
     public void StartWalking()
     {
-        animator.Play("Walk");
+        animator.SetBool("IsWalking", true);
     }
 
     public void StopWalking()
     {
-        animator.Play("Idle");
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsWalkingBackward", false); 
     }
 
     public void SetDirection(float direction)
@@ -28,6 +29,7 @@ public class PlayerMarkController : MonoBehaviour
 
     public void StartWalkingBack()
     {
-        animator.Play("WalkBackward"); 
+        StartWalking(); 
+        animator.SetBool("IsWalkingBackward", true); 
     }
 }
