@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -109,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
             // Move relative to facing direction
             velocityX = (int)faceDirection * move3DInput * speed;
         }
-        
+
         rb.velocity = new Vector3(velocityX, rb.velocity.y, rb.velocity.z);
     }
 
