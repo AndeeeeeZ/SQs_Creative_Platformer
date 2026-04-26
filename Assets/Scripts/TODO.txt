@@ -6,6 +6,8 @@ Code
 - Dialogue system
 - Plague (the sign or whatever) 
 - Monster
+- Make 2D camera not move when jumping
+- Ground detection
 
 Art
 - Add character art
