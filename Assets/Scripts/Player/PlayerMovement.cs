@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float sprintExtraSpeed = 5f;
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] private float jumpForce = 5f;
 
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float move2DInput;
     private float move3DInput;
+
+    private bool sprinting = false;
 
     private enum Direction
     {
@@ -61,6 +65,9 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Move3D.performed += Move3D;
         input.Player.Move3D.canceled += StopMove3D;
 
+        input.Player.Sprint.performed += StartSprint;
+        input.Player.Sprint.canceled += StopSprint;
+
         input.Player.Jump.performed += Jump;
     }
 
@@ -71,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
 
         input.Player.Move3D.performed -= Move3D;
         input.Player.Move3D.canceled -= StopMove3D;
+
+        input.Player.Sprint.performed -= StartSprint;
+        input.Player.Sprint.canceled -= StopSprint;
 
         input.Player.Jump.performed -= Jump;
 
@@ -87,18 +97,19 @@ public class PlayerMovement : MonoBehaviour
     private void MoveUpdate()
     {
         float velocityX = 0f;
+        float speed = moveSpeed + (sprinting ? sprintExtraSpeed : 0f);
 
         // Prioritize 2D input if held
         if (move2DHeld)
         {
-            velocityX = move2DInput * moveSpeed;
+            velocityX = move2DInput * speed;
         }
         else if (move3DHeld)
         {
             // Move relative to facing direction
-            velocityX = (int)faceDirection * move3DInput * moveSpeed;
+            velocityX = (int)faceDirection * move3DInput * speed;
         }
-
+        
         rb.velocity = new Vector3(velocityX, rb.velocity.y, rb.velocity.z);
     }
 
@@ -163,8 +174,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    #region Jump
+    private void StartSprint(InputAction.CallbackContext context)
+    {
+        sprinting = true;
+    }
 
+    private void StopSprint(InputAction.CallbackContext context)
+    {
+        sprinting = false;
+    }
+
+
+    #region Jump
     private void Jump(InputAction.CallbackContext context)
     {
         ApplyJumpForce();

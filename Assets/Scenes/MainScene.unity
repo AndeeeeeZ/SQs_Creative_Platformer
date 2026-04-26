@@ -911,7 +911,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304268091}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &304268095
 Camera:
   m_ObjectHideFlags: 0
@@ -1780,6 +1780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMark: {fileID: 953317119}
   moveSpeed: 10
+  sprintExtraSpeed: 5
   turnSpeed: 400
   jumpForce: 5
 --- !u!114 &464495581

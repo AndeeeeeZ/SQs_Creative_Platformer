@@ -1,10 +1,9 @@
 Code
 - Going up and down
+- Fix jump
 - Camera shake for walking
 - Make 2D camera fit in a mirror in hand
-- Carrot
 - Dialogue system
-- Plague (the sign or whatever) 
 - Monster
 - Make 2D camera not move when jumping
 - Ground detection
@@ -13,5 +12,7 @@ Code
 Art
 - Add character art
 - Add environment art
+
+2D
 
 
