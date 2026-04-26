@@ -25,8 +25,6 @@ public class DialogueObject : ScriptableObject
     public bool ToNextLine()
     {
         index++;
-        if (IsAtEnd())
-            index = Mathf.Clamp(index, 0, dialogues.Length - 1);  
         return IsAtEnd(); 
     }
 
