@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,19 +6,30 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerMarkController playerMark; // 2D representation of the player
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float turnSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float turnSpeed = 360f;
+    [SerializeField] private float jumpForce = 5f;
 
     private GameInput input;
     private Rigidbody rb;
 
-    // Movement
-    private float direction = 0;
-    private bool isMoving = false;
-
-    // Rotation
     private float targetYRotation;
+
+    private Direction faceDirection = Direction.RIGHT; // default facing right
+    private float currentVelocityX = 0f;
+
+    private bool move2DHeld;
+    private bool move3DHeld;
+
+    private float move2DInput;
+    private float move3DInput;
+
+    private enum Direction
+    {
+        NONE = 0,
+        LEFT = -1,
+        RIGHT = 1
+    }
 
     private void Awake()
     {
@@ -37,6 +47,37 @@ public class PlayerMovement : MonoBehaviour
         RotationUpdate();
     }
 
+    private void FixedUpdate()
+    {
+        MoveUpdate();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+
+        input.Player.Move2D.performed += Move2D;
+        input.Player.Move2D.canceled += StopMove2D;
+
+        input.Player.Move3D.performed += Move3D;
+        input.Player.Move3D.canceled += StopMove3D;
+
+        input.Player.Jump.performed += Jump;
+    }
+
+    private void OnDisable()
+    {
+        input.Player.Move2D.performed -= Move2D;
+        input.Player.Move2D.canceled -= StopMove2D;
+
+        input.Player.Move3D.performed -= Move3D;
+        input.Player.Move3D.canceled -= StopMove3D;
+
+        input.Player.Jump.performed -= Jump;
+
+        input.Disable();
+    }
+
     private void RotationUpdate()
     {
         Vector3 angles = transform.eulerAngles;
@@ -44,51 +85,93 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(angles.x, yRotation, angles.z);
     }
 
-    private void FixedUpdate()
-    {
-        MoveUpdate();
-    }
-
     private void MoveUpdate()
     {
-        float xVelocity = 0f;
-        if (isMoving)
-            xVelocity = direction * moveSpeed;
-        rb.velocity = new Vector3(xVelocity, rb.velocity.y, rb.velocity.z);
+        float velocityX = 0f;
+
+        // Prioritize 2D input if held
+        if (move2DHeld)
+        {
+            velocityX = move2DInput * moveSpeed;
+        }
+        else if (move3DHeld)
+        {
+            // Move relative to facing direction
+            velocityX = (int)faceDirection * move3DInput * moveSpeed;
+        }
+
+        rb.velocity = new Vector3(velocityX, rb.velocity.y, rb.velocity.z);
     }
 
-    private void OnEnable()
+    // A / D input
+    // Sets facing + direct movement
+    private void Move2D(InputAction.CallbackContext context)
     {
-        input.Enable();
-        input.Player.Move3D.performed += Move;
-        input.Player.Move3D.canceled += StopMoving;
-        input.Player.Jump.performed += Jump;
-    }
-    private void OnDisable()
-    {
-        input.Player.Move3D.performed -= Move;
-        input.Player.Move3D.canceled -= StopMoving;
-        input.Player.Jump.performed -= Jump;
-        input.Disable();
-    }
-    private void Move(InputAction.CallbackContext context)
-    {
-        isMoving = true;
-        direction = context.ReadValue<float>();
-        playerMark.StartWalking(); 
-        
-        // Adjust target rotation based on direction
-        targetYRotation = direction > 0 ? 0f : 180f;
-        playerMark.SetDirection(direction); 
-    }
-    private void StopMoving(InputAction.CallbackContext context)
-    {
-        isMoving = false;
-        playerMark.StopWalking(); 
+        move2DHeld = true;
+        move2DInput = context.ReadValue<float>();
+
+        if (move2DInput > 0f)
+        {
+            faceDirection = Direction.RIGHT;
+            targetYRotation = 0f;
+        }
+        else if (move2DInput < 0f)
+        {
+            faceDirection = Direction.LEFT;
+            targetYRotation = 180f;
+        }
+
+        playerMark.StartWalking();
+        playerMark.SetDirection((float)faceDirection);
     }
 
-    // Use before applying upward force for jump
-    // Necessary so the negative downward force doesn't cancel out the upward jump force
+    private void StopMove2D(InputAction.CallbackContext context)
+    {
+        move2DHeld = false;
+
+        if (!move3DHeld)
+        {
+            playerMark.StopWalking();
+        }
+    }
+
+    // W / S input
+    // Moves relative to facing, does NOT change rotation
+    private void Move3D(InputAction.CallbackContext context)
+    {
+        move3DHeld = true;
+        move3DInput = context.ReadValue<float>();
+
+        if (move3DInput > 0f)
+        {
+            // Forward
+            playerMark.StartWalking();
+        }
+        else if (move3DInput < 0f)
+        {
+            // Backward
+            playerMark.StartWalkingBack();
+        }
+    }
+
+    private void StopMove3D(InputAction.CallbackContext context)
+    {
+        move3DHeld = false;
+
+        if (!move2DHeld)
+        {
+            playerMark.StopWalking();
+        }
+    }
+
+    #region Jump
+
+    private void Jump(InputAction.CallbackContext context)
+    {
+        ApplyJumpForce();
+    }
+
+    // Reset vertical velocity before jump
     private void ResetYVelocity()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -97,11 +180,8 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyJumpForce()
     {
         ResetYVelocity();
-        Vector3 force = Vector3.up * jumpForce;
-        rb.AddForce(force, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-    private void Jump(InputAction.CallbackContext context)
-    {
-        ApplyJumpForce();
-    }
+
+    #endregion
 }
