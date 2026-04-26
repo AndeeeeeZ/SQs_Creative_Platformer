@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Stair : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Transform spawnTransform; // position + rotation
+    [SerializeField] private Transform teleportTransform; // position + rotation
     [SerializeField] private Stair correspondingStair; 
     [SerializeField] private GameObject UI;
+    [SerializeField] private PlayerMovement.Direction directionWhenTeleport;
 
     private void Awake()
     {
@@ -20,8 +21,25 @@ public class Stair : MonoBehaviour, IInteractable
         UI.SetActive(false); 
     }
 
-    public void OnInteract()
+    public Transform GetTeleportTransform()
     {
-        Debug.Log("Interacted with stair"); 
+        return teleportTransform;
+    }
+
+    public PlayerMovement.Direction GetTeleportDirection()
+    {
+        return directionWhenTeleport; 
+    }
+
+    public void OnInteract(Transform interactor)
+    {
+        Transform targetTransform = correspondingStair.GetTeleportTransform(); 
+        interactor.position = targetTransform.position; 
+        if (interactor.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
+        {
+            playerMovement.SetPlayerDirection(correspondingStair.GetTeleportDirection()); 
+        }
+        else
+            Debug.LogWarning($"Unable to get player movement component from {interactor.gameObject.name}"); 
     }
 }

@@ -33,6 +33,6 @@ public class PlayerInteract : MonoBehaviour
             return; 
         }
 
-        currInteractable.OnInteract(); 
+        currInteractable.OnInteract(transform); 
     }
 }

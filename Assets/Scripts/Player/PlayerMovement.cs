@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool sprinting = false;
 
-    private enum Direction
+    public enum Direction
     {
         NONE = 0,
         LEFT = -1,
@@ -183,6 +183,25 @@ public class PlayerMovement : MonoBehaviour
         sprinting = false;
     }
 
+    public void SetPlayerDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.RIGHT:
+                targetYRotation = 0f;
+                break;
+            case Direction.LEFT:
+                targetYRotation = 180f;
+                break;
+        }
+
+        // Set current rotation to target rotation to skip the rotation process
+        Vector3 angles = transform.eulerAngles;
+        transform.rotation = Quaternion.Euler(angles.x, targetYRotation, angles.z);
+
+        faceDirection = direction; 
+        playerMark.SetDirection((float)faceDirection);
+    }
 
     #region Jump
     private void Jump(InputAction.CallbackContext context)
