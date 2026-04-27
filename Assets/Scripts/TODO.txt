@@ -1,12 +1,7 @@
 Code
 - Monster
-- Better Jump
 - Camera shake for walking
 - Make 2D camera fit in a thing in hand
 - Make 2D camera not move when jumping
 - Sounds
 - Carrot Counter
-- Pull carrot
-
-Art
-- Side Stair 2nd floor 2D
