@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private GameInput input;
     private Rigidbody rb;
+    private bool isGrounded;
 
     private float targetYRotation;
 
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         input = new GameInput();
         rb = GetComponent<Rigidbody>();
+        isGrounded = false;
     }
 
     private void Start()
@@ -199,14 +201,17 @@ public class PlayerMovement : MonoBehaviour
         Vector3 angles = transform.eulerAngles;
         transform.rotation = Quaternion.Euler(angles.x, targetYRotation, angles.z);
 
-        faceDirection = direction; 
+        faceDirection = direction;
         playerMark.SetDirection((float)faceDirection);
     }
 
     #region Jump
     private void Jump(InputAction.CallbackContext context)
     {
+        if (!isGrounded) return;
+        
         ApplyJumpForce();
+        isGrounded = false;
     }
 
     // Reset vertical velocity before jump
@@ -219,6 +224,13 @@ public class PlayerMovement : MonoBehaviour
     {
         ResetYVelocity();
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    // Grounded only if falling or stopping vertically
+    public void TryGrounding()
+    {
+        if (rb.velocity.y <= 0f)
+            isGrounded = true; 
     }
 
     #endregion

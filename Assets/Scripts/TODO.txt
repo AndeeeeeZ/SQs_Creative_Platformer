@@ -1,6 +1,5 @@
 Code
-- Fix jump
-- Ground detection
+- Better Jump
 - Camera shake for walking
 - Make 2D camera fit in a thing in hand
 - Monster

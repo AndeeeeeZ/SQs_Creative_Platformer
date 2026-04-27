@@ -1809,9 +1809,9 @@ GameObject:
   - component: {fileID: 387933460}
   - component: {fileID: 387933459}
   - component: {fileID: 387933458}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   moveSpeed: 10
   sprintExtraSpeed: 5
   turnSpeed: 400
-  jumpForce: 5
+  jumpForce: 15
 --- !u!114 &464495581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,9 +2581,9 @@ GameObject:
   - component: {fileID: 591720845}
   - component: {fileID: 591720844}
   - component: {fileID: 591720843}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Floor (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4100,7 +4100,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.52332264, y: -0.46282277, z: 0.3736287, w: 0.61018866}
   m_LocalPosition: {x: 1.79, y: 1.16, z: -0.83}
-  m_LocalScale: {x: 0.12876093, y: 0.08584061, z: 0.08584061}
+  m_LocalScale: {x: 0.11, y: 0.07333332, z: 0.07333332}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 464495578}
@@ -5719,6 +5719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1754478552}
   - component: {fileID: 1754478553}
+  - component: {fileID: 1754478554}
   m_Layer: 0
   m_Name: GroundDetection
   m_TagString: Untagged
@@ -5762,6 +5763,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1754478554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754478551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b17f1296e6075449e07a87e1d511d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 464495580}
 --- !u!1 &1764037398
 GameObject:
   m_ObjectHideFlags: 0
