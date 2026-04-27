@@ -25,10 +25,9 @@ public class BackgroundParallax : MonoBehaviour
         Vector3 delta = _target.position - _lastPos;
 
         // Convert movement into UV offset
-        // NOTE: swapped x and y due to weird but that applied rotated material
         Vector2 uvOffset = new Vector2(
-            delta.y * _parallaxX,
-            delta.x * _parallaxY
+            -delta.x * _parallaxX,
+            delta.y * _parallaxY
         );
 
         // Apply offset

@@ -2761,7 +2761,7 @@ MonoBehaviour:
   _img: {fileID: 677348332}
   _target: {fileID: 464495578}
   _parallaxX: 0.02
-  _parallaxY: 0.02
+  _parallaxY: 0.01
 --- !u!1001 &686328550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5330,7 +5330,7 @@ MonoBehaviour:
   _img: {fileID: 1541168488}
   _target: {fileID: 464495578}
   _parallaxX: 0.1
-  _parallaxY: 0.1
+  _parallaxY: 0.05
 --- !u!1 &1597935721
 GameObject:
   m_ObjectHideFlags: 0
@@ -6188,7 +6188,7 @@ MonoBehaviour:
   _img: {fileID: 1970469537}
   _target: {fileID: 464495578}
   _parallaxX: 0.05
-  _parallaxY: 0.05
+  _parallaxY: 0.025
 --- !u!1 &2071590745
 GameObject:
   m_ObjectHideFlags: 0
