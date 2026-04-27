@@ -15,6 +15,7 @@ public class DialogueLoader : MonoBehaviour
     private void Start()
     {
         SetUIActiveness(true); 
+        currentDialogue.Reset(); 
     }
 
     public void StartNewDialogue(DialogueObject dialogue)
