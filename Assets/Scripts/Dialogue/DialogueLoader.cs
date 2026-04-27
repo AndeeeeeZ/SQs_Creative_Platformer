@@ -14,8 +14,14 @@ public class DialogueLoader : MonoBehaviour
 
     private void Start()
     {
-        currentDialogue.Reset(); 
-        LoadDialogue();
+        SetUIActiveness(true); 
+    }
+
+    public void StartNewDialogue(DialogueObject dialogue)
+    {
+        currentDialogue = dialogue; 
+        dialogue.Reset(); 
+        SetUIActiveness(true);
     }
 
     public void LoadDialogue()
@@ -23,6 +29,7 @@ public class DialogueLoader : MonoBehaviour
         if (currentDialogue.IsAtEnd())
         {
             Debug.LogWarning("At the end of dialogue"); 
+            SetUIActiveness(false); 
             return; 
         }
         Dialogue currentLine = currentDialogue.GetCurrentLine();
@@ -31,5 +38,13 @@ public class DialogueLoader : MonoBehaviour
         characterArtSprite.sprite = expression;  
 
         currentDialogue.ToNextLine(); 
+    }
+
+    private void SetUIActiveness(bool v)
+    {
+        foreach (GameObject g in AllUI)
+        {
+            g.SetActive(v); 
+        }
     }
 }

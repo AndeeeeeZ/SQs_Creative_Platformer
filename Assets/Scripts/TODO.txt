@@ -3,9 +3,5 @@ Code
 - Ground detection
 - Camera shake for walking
 - Make 2D camera fit in a thing in hand
-- Dialogue system
 - Monster
 - Make 2D camera not move when jumping
-
-Art
-- Fix window texture issue
