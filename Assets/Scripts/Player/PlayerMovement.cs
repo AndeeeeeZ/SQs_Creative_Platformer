@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private GameInput input;
     private Rigidbody rb;
+    private CustomGravity gravity;
     private bool isGrounded;
 
     private float targetYRotation;
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         input = new GameInput();
         rb = GetComponent<Rigidbody>();
+        gravity = GetComponent<CustomGravity>(); 
         isGrounded = false;
     }
 
@@ -53,6 +55,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (rb.velocity.y < 0f)
+        {
+            gravity.SwitchToFallGravity();
+        }
         MoveUpdate();
     }
 
@@ -70,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Sprint.canceled += StopSprint;
 
         input.Player.Jump.performed += Jump;
+        input.Player.Jump.performed += OnJumpRelease;
     }
 
     private void OnDisable()
@@ -84,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Sprint.canceled -= StopSprint;
 
         input.Player.Jump.performed -= Jump;
+        input.Player.Jump.performed -= OnJumpRelease;
 
         input.Disable();
     }
@@ -209,9 +217,14 @@ public class PlayerMovement : MonoBehaviour
     private void Jump(InputAction.CallbackContext context)
     {
         if (!isGrounded) return;
-        
+
         ApplyJumpForce();
         isGrounded = false;
+    }
+
+    private void OnJumpRelease(InputAction.CallbackContext context)
+    {
+        gravity.SwitchToFallGravity(); 
     }
 
     // Reset vertical velocity before jump
@@ -224,13 +237,14 @@ public class PlayerMovement : MonoBehaviour
     {
         ResetYVelocity();
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        gravity.SwitchToNormalGravity();
     }
 
     // Grounded only if falling or stopping vertically
     public void TryGrounding()
     {
         if (rb.velocity.y <= 0f)
-            isGrounded = true; 
+            isGrounded = true;
     }
 
     #endregion
