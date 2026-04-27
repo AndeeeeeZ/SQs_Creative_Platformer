@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d0b9f0da664b7448d70916de6d203a, type: 3}
-  m_Name: Intro
+  m_Name: Dig Carrot
   m_EditorClassIdentifier: 
   dialogues:
-  - expression: 8
-    line: Hello Player! Welcome to this game!
   - expression: 10
-    line: My Name is La... Rabby!
+    line: Look! here's a carrot!
+  - expression: 11
+    line: 'We must work hard to pull it '
   - expression: 8
-    line: We are going to collect carrot today!
-  - expression: 5
-    line: Can you help me with collecting carrots?
-  - expression: 9
-    line: Don't forget to use A & D to move!
+    line: Try to Click Click Click the "E" on you r keyboard!
   - expression: 2
-    line: Mi. Mi. Mew.
+    line: Mi Mi Mew~

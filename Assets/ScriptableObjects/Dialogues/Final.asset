@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d0b9f0da664b7448d70916de6d203a, type: 3}
-  m_Name: Intro
+  m_Name: Final
   m_EditorClassIdentifier: 
   dialogues:
   - expression: 8
-    line: Hello Player! Welcome to this game!
-  - expression: 10
-    line: My Name is La... Rabby!
-  - expression: 8
-    line: We are going to collect carrot today!
-  - expression: 5
-    line: Can you help me with collecting carrots?
-  - expression: 9
-    line: Don't forget to use A & D to move!
+    line: "Finally, you\u2019re about to beat the game!"
   - expression: 2
-    line: Mi. Mi. Mew.
+    line: Finally, Finally, Finally!!
+  - expression: 6
+    line: Finally....
+  - expression: 7
+    line: FINALLY its time to go! I waited for this for so long. Finally!
+  - expression: 8
+    line: Goodbye! Bitch! Fuck you Rabby, your daddy's name is Larry!
+  - expression: 4
+    line: Bye Bye, Silly, Stay here in my place! Got it?
