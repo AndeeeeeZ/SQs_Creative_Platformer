@@ -36,6 +36,12 @@ public class FirstPersonRaycast : MonoBehaviour
         }
         else // When the raycast didn't hit anything
         {
+            // NOTE: this is for solving issue where interfacing is not null when gameObject is destroyed 
+            if (currentInteractable is MonoBehaviour mb && mb == null)
+            {
+                currentInteractable = null;
+                return;
+            }
             currentInteractable?.OnExitRange();
             currentInteractable = null;
         }
@@ -48,7 +54,8 @@ public class FirstPersonRaycast : MonoBehaviour
 
     public IInteractable GetCurrentInteractable()
     {
-        return currentInteractable; 
+        if (currentInteractable == null) return null;
+        return currentInteractable;
     }
 
 }
