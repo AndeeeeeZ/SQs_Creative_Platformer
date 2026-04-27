@@ -16,6 +16,8 @@ MonoBehaviour:
   - expression: 15
     line: What kind of game wouldn't have obstacles?
   - expression: 1
-    line: Night has fallen, WATCH OUT FOR CUTIE
+    line: Night has fallen, WATCH OUT FOR CUTIE...
+  - expression: 14
+    line: In case you need it, press Left Shift to sprint!
   - expression: 2
     line: MewMewMewMiMiMiMewMewMew
