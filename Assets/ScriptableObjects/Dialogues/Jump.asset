@@ -10,14 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30d0b9f0da664b7448d70916de6d203a, type: 3}
-  m_Name: Dig Carrot
+  m_Name: Jump
   m_EditorClassIdentifier: 
   dialogues:
-  - expression: 10
-    line: Look! Here's a BIG carrot!
-  - expression: 11
-    line: 'We must work hard to pull it '
   - expression: 8
-    line: Try to Click Click Click the "E" on your keyboard!
-  - expression: 2
-    line: Mi Mi Mew~
+    line: Press Space to jump!
