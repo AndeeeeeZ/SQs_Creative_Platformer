@@ -31,6 +31,10 @@ public class DialogueLoader : MonoBehaviour
     {
         if (currentDialogue.IsAtEnd())
         {
+            if (currentDialogue.TriggerEventWhenEnd)
+            {
+                currentDialogue.endEvent.Raise(); 
+            }
             Debug.LogWarning("At the end of dialogue");
             SetUIActiveness(false);
             return;

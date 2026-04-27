@@ -9,13 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d0b9f0da664b7448d70916de6d203a, type: 3}
-  m_Name: Dead
+  m_Script: {fileID: 11500000, guid: 0726e7253fb27804ca8d319157780b95, type: 3}
+  m_Name: OnSceneEnds
   m_EditorClassIdentifier: 
-  dialogues:
-  - expression: 3
-    line: AAAAAAAAAAAAAAAAAA!
-  - expression: 0
-    line: .
-  TriggerEventWhenEnd: 1
-  endEvent: {fileID: 11400000, guid: dd1ff88564ded4a448f091f388c03c30, type: 2}

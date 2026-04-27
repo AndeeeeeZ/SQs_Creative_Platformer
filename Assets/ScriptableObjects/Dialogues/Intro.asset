@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - expression: 8
-    line: Hello Player! Welcome to this game!
+    line: Hello Player! Welcome to my game!
   - expression: 10
     line: My Name is La... Rabby!
   - expression: 8
@@ -25,3 +25,5 @@ MonoBehaviour:
     line: Don't forget to use A & D to move!
   - expression: 2
     line: Mi. Mi. Mew.
+  TriggerEventWhenEnd: 0
+  endEvent: {fileID: 0}

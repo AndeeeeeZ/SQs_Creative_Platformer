@@ -22,6 +22,8 @@ MonoBehaviour:
   - expression: 7
     line: FINALLY its time to go! I waited for this for so long. Finally!
   - expression: 8
-    line: Goodbye! Bitch! Fuck you Rabby, your daddy's name is Larry!
+    line: Goodbye! Bitch! Fuck Rabby, your daddy my name is Larry!
   - expression: 4
-    line: Bye Bye, Silly, Stay here in my place! Got it?
+    line: Bye Bye, Silly. Stay here in my place! Got it?
+  TriggerEventWhenEnd: 1
+  endEvent: {fileID: 11400000, guid: f96492c9806054b47ad41c4bca711cc1, type: 2}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class DialogueObject : ScriptableObject
 {
     [SerializeField] private Dialogue[] dialogues;
+    public bool TriggerEventWhenEnd = false; 
+    public VoidEvent endEvent; 
     private int index; 
 
     public void StartDialogue()

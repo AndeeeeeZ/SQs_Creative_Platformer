@@ -19,5 +19,7 @@ MonoBehaviour:
     line: Night has fallen, WATCH OUT FOR CUTIE...
   - expression: 14
     line: In case you need it, press Left Shift to sprint!
+  - expression: 1
+    line: I would be careful before you go down there...
   - expression: 2
     line: MewMewMewMiMiMiMewMewMew
