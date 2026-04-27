@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: 2D Sprite
+    uniqueID: 4139007745
+    locked: 0
